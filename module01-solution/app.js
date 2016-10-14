@@ -49,6 +49,8 @@
                     $scope.message      = filteredMeals.length > 3 ? _MSG_TOOMUCH : _MSG_ENJOY;
                     $scope.msgStyle     = _STYLE_OK;
                     $scope.inputStyle   = _BD_STYLE_OK;
+
+                    // TODO: set imploded filtered list as input text
                 }
                 else
                 {
