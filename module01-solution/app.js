@@ -18,8 +18,8 @@
         var _BD_STYLE_OK    = {border: '2px solid #00b674'};
         var _BD_STYLE_DFLT  = {};
 
-        var _MSG_TOOMUCH    = 'Too much';
-        var _MSG_ENJOY      = 'Enjoy';
+        var _MSG_TOOMUCH    = 'Too much!';
+        var _MSG_ENJOY      = 'Enjoy!';
         var _MSG_ERROR      = 'Please enter data first';
 
         $scope.message      = '';
