@@ -14,14 +14,6 @@
   ToBuyController.$inject             = ['$scope', 'ShoppingList'];
   AlreadyBoughtController.$inject     = ['$scope', 'ShoppingList'];
 
-  function ToBuyController($scope, slService) {
-    this.items = slService.getAvailableItems();
-  };
-
-  function AlreadyBoughtController($scope, slService) {
-    this.items = slService.getBoughtItems();
-  };
-
   function ShoppingListProviderConfig(ShoppingListProvider) {
     ShoppingListProvider.options.products = [{
           name:     'Butter',
@@ -63,20 +55,37 @@
   function ShoppingListCheckOffService() {
     var svc = this;
 
+    // Use this to monitor changes b/n controllers
+    svc.timestamp      = false;
+
     svc.availableItems = svc.boughtItems = [];
 
     svc.initProducts = function(productsList) {
       svc.setAvailableItems(productsList);
 
       return svc;
-    }
+    };
 
-    svc.buyListIsEmpty = function() {
-      return svc.getAvailableItems().length ? true : false;
+    svc.updateTimestamp = function() {
+      svc.timestamp = (new Date()).getMilliseconds();
+    };
+
+    svc.getTimestamp = function() {
+      return svc.timestamp;
     };
 
     svc.buyItem = function(itemIdx){
-      svc.getBoughtItems().push(svc.getAvailableItems().splice(itemIdx, 1));
+      var item = svc.getAvailableItems().splice(itemIdx, 1);
+
+      if(item){
+        svc.getBoughtItems().push(item);
+
+        svc.updateTimestamp();
+      }
+      else
+      {
+        throw new Exception('Item not found in available products list!');
+      }
     }
 
     svc.getAvailableItems = function(){
@@ -90,7 +99,24 @@
     }
 
     svc.getBoughtItems = function(){
-      return svc.availableItems;
+      return svc.boughtItems;
     }
+  };
+
+  function ToBuyController($scope, slService) {
+    this.buyItem = function(itemIdx){
+        slService.buyItem(itemIdx);
+    };
+
+    this.items    = slService.getAvailableItems();
+
+    $scope.$watch(function () {
+      return slService.getTimestamp();
+    });
+  };
+
+  function AlreadyBoughtController($scope, slService) {
+    this.availableItems    = slService.getAvailableItems();
+    this.items    = slService.getBoughtItems();
   };
 })();
