@@ -55,9 +55,6 @@
   function ShoppingListCheckOffService() {
     var svc = this;
 
-    // Use this to monitor changes b/n controllers
-    svc.timestamp      = false;
-
     svc.availableItems = svc.boughtItems = [];
 
     svc.initProducts = function(productsList) {
@@ -66,21 +63,12 @@
       return svc;
     };
 
-    svc.updateTimestamp = function() {
-      svc.timestamp = (new Date()).getMilliseconds();
-    };
-
-    svc.getTimestamp = function() {
-      return svc.timestamp;
-    };
-
     svc.buyItem = function(itemIdx){
       var item = svc.getAvailableItems().splice(itemIdx, 1);
 
-      if(item){
-        svc.getBoughtItems().push(item);
-
-        svc.updateTimestamp();
+      if(item.length){
+        svc.getBoughtItems().push(item[0]);
+        console.log(svc.getBoughtItems());
       }
       else
       {
@@ -109,14 +97,9 @@
     };
 
     this.items    = slService.getAvailableItems();
-
-    $scope.$watch(function () {
-      return slService.getTimestamp();
-    });
   };
 
   function AlreadyBoughtController($scope, slService) {
-    this.availableItems    = slService.getAvailableItems();
     this.items    = slService.getBoughtItems();
   };
 })();
