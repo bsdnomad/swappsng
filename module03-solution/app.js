@@ -5,7 +5,7 @@
     .controller('NarrowItDownController', NarrowItDownController)
     .service('MenuSearchService', MenuSearchService)
     .directive('foundItems', FoundItemsDirective)
-    .constant('MenuListURL', 'http://davids-restaurant.herokuapp.com/menu_items.json')
+    .constant('MenuListURL', 'https://davids-restaurant.herokuapp.com/menu_items.json')
   ;
 
   NarrowItDownController.$inject = ['MenuSearchService'];
