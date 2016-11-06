@@ -1,7 +1,7 @@
 (function (angular) {
-  'use strict';
+    'use strict';
 
-  angular
-    .module('data',[])
-  ;
+    angular
+        .module('data', [])
+    ;
 })(window.angular);
