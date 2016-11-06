@@ -9,28 +9,32 @@
     RoutesConfig.$inject = ['$stateProvider', '$urlRouterProvider'];
 
     function RoutesConfig($stateProvider, $urlRouterProvider) {
-
-        // Fallback URL
         $urlRouterProvider.otherwise('/');
 
-        // UI states
         $stateProvider
-            // Home page
             .state('home', {
                 url: '/',
                 templateUrl: 'src/restaurant/templates/home.template.html'
             })
-            // Categories list page
             .state('categories', {
                 url: '/categories',
                 templateUrl: 'src/restaurant/templates/categories.template.html',
-                controller: 'MenuController as menu'
+                controller: 'MenuController as menu',
+                resolve: {
+                    categories: ['MenuDataService', function (MenuDataService) {
+                        return MenuDataService.getAllCategories();
+                    }]
+                }
             })
-            // Category items list page
             .state('items', {
-                url: '/items',
-                templateUrl: 'src/restaurant/templates/items.template.html' //,
-                //   controller: 'MainShoppingListController as mainList'
+                url: '/category/{categoryShortName}',
+                templateUrl: 'src/restaurant/templates/items.template.html',
+                controller: 'ItemsController as list',
+                resolve: {
+                    items: ['$stateParams', 'MenuDataService', function ($stateParams, MenuDataService) {
+                        return MenuDataService.getItemsForCategory($stateParams.categoryShortName);
+                    }]
+                }
             })
         ;
     }

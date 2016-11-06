@@ -6,20 +6,11 @@
         .controller('MenuController', MenuController)
     ;
 
-    MenuController.$inject = ['MenuDataService'];
+    MenuController.$inject = ['categories'];
 
-    function MenuController(MenuDataService) {
+    function MenuController(categories) {
         var menu = this;
 
-        menu.categories = [];
-
-        menu.$onInit = function () {
-            MenuDataService
-                .getAllCategories()
-                .then(function (result) {
-                    menu.categories = result.data;
-                })
-            ;
-        };
+        menu.categories = categories;
     }
 })(window.angular);

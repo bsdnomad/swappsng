@@ -1,7 +1,3 @@
-<h3>Category: {{ $ctrl.category }}</h3>
-
 <ul>
-  <li ng-repeat="item in $ctrl.items">
-    {{ item.name }}
-  </li>
+    <li ng-repeat="item in $ctrl.items">{{ item.name }} - <em>{{ item.description }}</em></li>
 </ul>

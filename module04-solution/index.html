@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html ng-app="MenuApp">
-  <head>
+<head>
     <meta charset="utf-8">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <title>Welcome to Our Restaurant!</title>
-  </head>
-  <body>
+</head>
+<body>
     <div class="container">
-      <div class="page-header">
-        <h1>Welcome to our Restaurant</h1>
-      </div>
+        <div class="page-header">
+            <h1>Welcome to our Restaurant</h1>
+        </div>
 
-      <ui-view></ui-view>
+        <ui-view>
+            <span class="glyphicon glyphicon-refresh"> Loading&hellip;</span>
+        </ui-view>
     </div>
 
     <!-- Libraries -->
@@ -30,6 +32,7 @@
     <script src="src/restaurant/menu.controller.js"></script>
     <script src="src/restaurant/categories.component.js"></script>
     <script src="src/restaurant/items.component.js"></script>
+    <script src="src/restaurant/items.controller.js"></script>
     <script src="src/restaurant/menudata.service.js"></script>
-  </body>
+</body>
 </html>
