@@ -1,0 +1,32 @@
+<div class="container">
+  <h2 id="menu-categories-title" class="text-center">
+    My Info
+  </h2>
+
+  <div class="error-message" ng-hide="prCtrl.user">
+    Not Signed Up Yet. <a ui-sref="public.newsletter.registration">Sign up Now!</a>
+  </div>
+
+  <div ng-show="prCtrl.user">
+    <dl class="dl-horizontal">
+      <dt>First name:</dt>
+      <dd>{{ prCtrl.user.forname }}</dd>
+      <dt>Last name:</dt>
+      <dd>{{ prCtrl.user.surname }}</dd>
+      <dt>Email:</dt>
+      <dd>{{ prCtrl.user.email }}</dd>
+      <dt>Phone:</dt>
+      <dd>{{ prCtrl.user.phone }}</dd>
+      <dt>Favourite meal:</dt>
+      <dd>{{ prCtrl.user.menuItem }}</dd>
+      <dt ng-show="prCtrl.user.menuItemData">Image:</dt>
+      <dd ng-show="prCtrl.user.menuItemData">
+        <img class="img-responsive" width="250" height="150" ng-src="{{prCtrl.basePath}}/images/{{prCtrl.user.menuItemData.short_name}}.jpg" alt="{{prCtrl.user.menuItemData.name}}">
+      </dd>
+      <dt ng-show="prCtrl.user.menuItemData">Title:</dt>
+      <dd ng-show="prCtrl.user.menuItemData">{{ prCtrl.user.menuItemData.name }}</dd>
+      <dt ng-show="prCtrl.user.menuItemData">Description:</dt>
+      <dd ng-show="prCtrl.user.menuItemData">{{ prCtrl.user.menuItemData.description }}</dd>
+    </dl>
+  </div>
+</div>

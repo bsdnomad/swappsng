@@ -183,3 +183,10 @@ h3.menu-item-title {
     width: 100%;
   }
 }
+
+
+/***********************************************/
+.error-message {
+  font-weight: bold;
+  color: #ff0000;
+}
